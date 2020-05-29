@@ -1,1 +1,1 @@
-Accepted Solutions competitive programming problems 
+Accepted Solutions to competitive programming problems 
