@@ -14,7 +14,6 @@
 #include "cstring"
 #include<cmath>
 #include <deque>
-#define MKP make_pair 
 #define ull unsigned long long
 using namespace std;
   	 
