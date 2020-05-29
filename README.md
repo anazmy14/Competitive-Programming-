@@ -1,1 +1,1 @@
-Accepted problems of codeforces
+Accepted Solutions to Comptetitive Programming Problems 
