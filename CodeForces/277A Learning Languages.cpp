@@ -15,49 +15,88 @@
 #include<cmath>
 #include <deque>
 #define MKP make_pair 
-#define ull unsigned long long
 using namespace std;
-
+ 
+int gcd(int a, int b)
+{
+    if (a == 0)
+        return b;
+    return gcd(b % a, a);
+}
+ 
+int lcm(int a, int b)
+{
+    return (a*b)/gcd(a, b);
+}
+ 
+int fact(int n) {
+    if (n == 0 || n == 1)
+        return 1;
+    else
+        return n * fact(n - 1);
+}
+ 
+ 
+ 
+struct disjoint {
+	vector<int> rank ;
+	vector<int> parent ;
+ 
+	disjoint (int m) {
+		for( int i= 0; i < m+1 ; i++ ) {
+			rank.push_back(0) ;
+			parent.push_back(i) ;
+		}
+	}
+ 
+	int find ( int x) {
+		if ( parent[x] != x ) 
+			return parent[x] = find( parent [x])  ;
+		return x ;
+	}
+ 
+	void link ( int x , int y) {
+		x = find(x) , y  = find (y) ;
+		if ( x == y ) 
+			return ;
+		if ( rank [y] > rank[x] ) 
+			swap(x ,y) ;
+		if ( rank[y] == rank[x] ) 
+			rank[x]++ ;
+		parent[y] =  x ;
+	}
+ 
+};
+ 
 int main () {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int t ; cin >> t ;
- 
-	while (  t--) {
-		int n , m ,x , y , p  , s =0 ;
-		cin >> n >> m >> x >> y ;
-		vector< vector<char> > v(n); 
-		p = min (2*x , y ) ;
-		for ( int i =0 ; i <n ; i++ ){
-			for( int j =0 , z ; j <m ;j++ ) {
-				char c ;
-				cin >> c ;
-				v[i].push_back(c) ;
-			}
+	int n , m , c = 0 ;
+	cin >> n >> m ;
+	disjoint st (m) ;
+	unordered_set<int> s , z ;
+	for ( int i = 0 ; i < n ; i++ ) {
+		int k , x = 0 ; cin >> k ;
+		if (!k) c++ ;
+		while (k--) {
+			int l ; cin >> l ; 
+			z.insert(l) ;
+			if (x) 
+				st.link( l , x ) ;
+			x = l ;			
 		}
-	  
- 
-		for ( int i =0 ; i <n ; i++ ){
-	
-			for ( int j = 0; j < m; j++ ){
-				if( v[i][j] == '*' ) continue ; 
-				if ( j < m-1 && v[i][j+1] == '.' ) {
-					s += p ;
-					v[i][j+1] = '*' ;
-				}
-				else 
-					s += x; 
-			}
- 
-		}
-		cout << s << endl ;
 	}
  
- 
- 
- 
- 
- 
+	for ( int i =1 ; i <= m ; i++ ) {
+		int p = st.find (i) ;
+		if ( z.find( p ) != z.end() )
+			s.insert(p) ;
+	}
+	if ( s.size() )
+		c += (s.size()-1) ;  
+	
+	cout << c ;
+    
 	return 0 ;
  
 }
