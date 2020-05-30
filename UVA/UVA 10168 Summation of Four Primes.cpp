@@ -69,7 +69,7 @@ int main () {
 			n -= v[i] ;
 		}
 		if ( s!=x) {
-			cout << -1 ; continue ;
+			cout << "Impossible." << endl ; continue ;
 		}
 		for ( int x:v) cout << x << " ";
 		cout << endl ;
