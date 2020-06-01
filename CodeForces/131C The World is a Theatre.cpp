@@ -57,7 +57,7 @@ ull nCr(ull n, ull r)
     } 
   
     else
-        p = 1; 
+        p = 1 ; 
   
     return p ; 
 } 
