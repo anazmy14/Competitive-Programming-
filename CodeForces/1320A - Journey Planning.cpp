@@ -3,7 +3,6 @@
 #include <string>
 #include <map>
 #define MKP make_pair
-#define ull unsigned long long
 using namespace std;
 
 
